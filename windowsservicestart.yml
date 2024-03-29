@@ -1,0 +1,7 @@
+- name: Converted ad hoc command example
+  hosts: win2019s01
+  tasks:
+    - name: Make sure the spooler service is started
+      ansible.windows.win_service:
+        name: spooler
+        state: restarted

@@ -1,0 +1,25 @@
+---
+- name: copy /etc/hosts/ to all servers
+  hosts: myhosts
+  tasks:
+    - name: check whether the hosts could reach
+      ansible.builtin.ping:
+
+    - name: Print message
+      ansible.builtin.debug:
+        msg: hello world
+
+    - name: copy to remote then backup the original if it differs from the copied version
+      ansible.builtin.copy:
+        src: /etc/hosts
+        dest: /etc/hosts
+        backup: yes
+
+    - name: get task information
+      ansible.builtin.shell: more /etc/hosts
+      register: result
+
+    - name:  Print return information from the previous task
+      ansible.builtin.debug:
+        var: result
+        verbosity: 2
